@@ -1,0 +1,879 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+
+<div id="div1" style="width:100px;height:50px;background:red;cursor:pointer;color:#fff;text-align:center;line-height:50px;">点击</div>
+<input type="checkbox">
+<button id="test1">插入多条数据</button>
+<button id="test2">删除Russellville数据</button><div id="listshow"><br /></div>
+<script type="text/javascript">
+    
+
+function Stack(){
+    this.dataStore = []
+    this.top    = 0;
+    this.push   = push
+    this.pop    = pop
+    this.peek   = peek
+    this.length = length;
+}
+function push(element){
+    this.dataStore[this.top++] = element;
+}
+function peek(element){
+    return this.dataStore[this.top-1];
+}
+function pop(){
+    return this.dataStore[--this.top];
+}
+function clear(){
+    this.top = 0
+}
+function length(){
+    return this.top
+}
+//栈结构 判断是否回文 即把元素反转后如果与原始的元素相等
+function isPalindrome(word){
+    var s = new Stack();
+    for (var i = 0; i < word.length; i++){
+        s.push(word[i])
+    }
+
+    var rword = "";
+    while(s.length() > 0){
+        rword += s.pop();
+
+    }
+    if(word == rword){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+console.log(isPalindrome("hahaahah"));
+//这个isPalindrome函数，其实就是通过调用stack类，然后把传递进来的word这个元素给分解后的每一个组成单元给押入到栈了，
+//根据栈的原理，后入先出的原则，通过pop的方法在反组装这个元素，最后比较下之前与组装后的，结果相等就是回文了
+
+
+//用递归实现一个阶乘算法
+//递归的方法
+function factorial(n){
+    if( n === 0){
+        return 1;
+    } else {
+        return n * factorial(n - 1)
+    }
+}
+//栈的方法
+function fact(n){
+    var s = new Stack();
+    while(n > 1){
+        //[5,4,3,2]
+        s.push(n--);
+    }
+    var product = 1;
+    while (s.length()>0){
+        product *= s.pop()
+    }
+    return product;
+}
+
+console.log(fact(5));
+
+
+
+// (function($){
+//     window.$ = $;
+
+// })(function(){
+//     var aquickExpr = /^(?:#(\w-))$/;
+//     function aquery(selector){
+//         return new aquery.fn.init(selector);
+//     }//end of aquery
+
+//     var animation = function(){
+//         var self = {};
+//         var queue = [];
+//         var fireing = false;
+//         var first = true; 
+
+//         var getStyle = function(obj,attr){
+//             return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj,false)[attr];
+//         }
+
+//         var makeAnim = function(element,options,func){
+//             var width = options.width;
+//             element.style.webkitTransitionDuration = '2000ms';
+//             element.style.webkitTransform = 'translate3d(' + width +'px,0,0)';
+//             //监听动画完结
+//             element.addEventListener('webkitTransitionEnd',function(){
+//                 func();
+//             })
+//         }//end of makeAnim()
+//         var _fire = function(){
+//             if(!fireing){
+//                 var onceRun = queue.shift();
+//                 if(onceRun){
+//                     fireing = true;
+//                     //next
+//                     onceRun(function(){
+//                         fireing = false;
+//                         _fire();//递归循环判断调用
+//                     });
+//                 }else{
+//                     fireing = true;
+//                 }
+//             }
+//         }//end of _fire()
+
+//         return self = {
+//             //增加队列
+//             add:function(element,options){
+//                 queue.push(function(func){
+//                     makeAnim(element,options,func)
+//                 });
+//                 //如果有一个队列立刻触发动画
+//                 if(first && queue.length){
+//                     first = false;
+//                     self.fire();
+//                 }
+//             },
+//             //触发
+//             fire:function(){
+//                 _fire();
+//             }
+//         }
+//     }()//自调用
+
+//     aquery.fn = aquery.prototype = {
+//         run:function(options){
+//             animations.add(this.element,options);
+//             return this;
+//         }
+//     }
+//     var init = aquery.fn.init = function(selector){
+//         var match = rquickExpr.exec(selector);
+//         var element = document.getElementById(match[1]);
+//         this.element = element;
+//         return this;
+//     }
+
+//     init.prototype = aquery.fn;
+//     return aquery;
+
+// })
+
+//一个简单的链表关系
+function createLinkList() {
+    var node = {};
+    var prev = null;
+    return {
+        add: function(val) {
+            //保存当前的引用
+            node = {
+                data: val,
+                next: prev || null
+            };
+        }
+    }
+}
+// var linksList = createLinkList();
+// console.log(linksList.add("arron1"));
+// console.log(linksList.add("arron2"));
+// console.log(node.next);
+// console.log(linksList)
+// function createLinkList(){
+//     var _this = {};
+//     var prev = null;
+//     return {
+//         add:function(val){
+//             prev = {
+//                 data:val,
+//                 next:prev||null
+//             }
+//         }
+//     }
+// }
+
+var findNode = function createFindNode(currNode){
+    return function(key){
+        while(currNode.data != key){
+            currNode = currNode.next;
+        }
+    }
+}(headNode)
+
+//动态作用域
+function createNode(data){
+    this.data = data;
+    this.next = null;
+
+}
+//初始化头部节，从headNode开始形成一条链条，通过next衔接
+var headNode = new createNode("head");
+//在链表中找到对应的节
+var findNode = function createNode(currNode){
+    return function(key){
+        //循环找到执行的节，如果没有则返回本身
+        while(currNode.data != key){
+            currNode = currNode.next;
+        }
+        return currNode;
+    }
+}(headNode)
+//插入一个新节
+this.insert = function(data, key){
+    //创建一个新节
+    var newNode = new createNode(data);
+    //在链条中找到对应的数据节，然后把新加入的挂进去
+    var current = findNode(key);
+    newNode.next = current.next;
+    current.next = newNode;
+}
+
+function Stack(){
+    this.dataStore = [];
+    this.top = 0;
+    this.push = push;
+    this.pop = pop;
+    this.peek = peek;
+    this.length = length;
+}
+
+function push(element){
+    this.dataStore[this.top++] = element;
+}
+
+function peek(element){
+    return this.dataStore[this.top-1];
+}
+//返回删除的具体的数值
+function pop(){
+    return this.dataStore[--this.top];
+}
+function clear(){
+    this.top = 0;
+}
+function length(){
+    return this.top;
+}
+
+
+//判断是否回文
+function ispalindrome(word){
+    var s = new Stack();
+    //将word里面的字母按顺序放进栈中
+    for(var i=0;i<word.length;i++){
+        s.push(word[i]);
+    }
+    var rword = "";
+    //根据栈后进先出的原则，利用pop方法按顺序取出word的反序字母
+    while(s.length() > 0){
+        rword += s.pop();//得到word的反序组合
+    }
+    //通过新得到的反序组合与原始word值相比较，从而判断是否符合回文的条件
+    if(word == rword){
+        return true;
+    }else{
+        return false;
+    }
+}//end of ispalindrome()
+
+ispalindrome("12321");
+
+//用递归实现一个阶乘算法
+function factorial(n){
+    if(n === 0){
+        return 1;
+    }else{
+        return n*factorial(n - 1);
+    }
+}
+//通过while把n递减压入栈
+function fact(n){
+    var s = new Stack();
+    while(n > 1){
+        s.push(n--)
+    }
+    var product = 1;
+    while(s.length()>0){
+        product *= s.pop();
+    }
+    return product;
+}
+
+//利用栈实现递归
+function fact(n){
+
+    var s = new Stack();
+    //取出n到1的值
+    while(n > 1){
+        s.push(n--);
+    }
+
+    var product = 1;
+    while(s.length()>0){
+        product *= s.pop();
+    }
+
+    return product;
+}
+
+//队列是只允许在一端进行插入操作，另一个进行删除操作的线性表，队列是一种先进先出的数据结构，队列在程序设计中用的非常的频繁，因为js单线程，导致了任何一个时间段只能执行一个任务，而且还参杂了异步的机制
+//那么带来的问题是在异步操作执行的时候，同步代码还在继续，那么同步代码依赖异步，自然就会出错和多个同步的任务在不同的时间段被调用
+// $book.animate({
+//     opacity:0.25,
+// }).animate({
+//     opacity:0.5,
+// }).animate({
+//     opacity:1
+// })
+//但是实际上这里就涉及到了一个本质的问题，动画是异步调用的，animate方法是同步执行的，所以这里就需要涉及到队列，因此jquery也给出了一个专门为动画设计的queue方法，队列本来就是一种特殊的线性表，在js中我们可以直接使用数组实现这样的一个设计，数组的push方法可以在数组末尾加入元素，shift方法则可删除数组的第一个元素
+
+function queue(){
+    this.dataStore = [];
+    this.enqueue = enqueue;
+    this.dequeue = dequeue;
+    this.first = first;
+    this.end = end;
+    this.toString = toString;
+    this.empty = empty;
+}
+//enqueue方法向队尾添加一个元素
+function enqueue(element){
+    this.dataStore.push(element);
+}
+//dequeue方法删除队首的元素
+function dequeue(){
+    this.dataStore.shift();
+}
+//可以使用如下方法读取队首和队尾的元素
+function first(){
+    return this.dataStore[0];
+}
+
+function end(){
+    return this.dataStore[this.dataStore.length - 1];
+}
+
+//toString方法显示队列内的所有元素
+function toString(){
+    var str = "";
+    for(var i = 0;i<this.dataStore.length;i++){
+        str +=this.dataStore[i] + '\n';
+    }
+    return str;
+}
+
+//需要一个方法判断队列是否为空
+function empty(){
+    if(this.dataStore.length == 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+var q = new queue();
+q.enqueue("Aaron1");
+q.enqueue("Aaron2");
+q.enqueue("Aaron3");
+
+console.log("队列头: " + q.first());   //("Aaron1");
+console.log("队列尾: " + q.end());    //("Aaron3");
+
+//队列采用的是线性的存储，那么就存在着顺序储存的一些弊端，比如排队买票，如果第一个买好了，后面的就会自然的往前移动一个空位，这样涉及到整个队列的每一个成员都要往前移动，不过js的队列是用数组描述的，底层解决了些弊端了，当然还有查找算法上的问题，比如可以用数组实现单链表结构等等，我们这里只讨论js的队列
+
+//模拟jquery，使用队列实现一个动画
+(function($){
+    window.$ = $;
+})(function(){
+    var rquickExpr = /^(?:#([\w-]*))$/;
+
+    function aquery(selector){
+        return new aquery.fn.init(selector);
+    }
+
+var animation = function(){
+    var self = {};
+    var queue = [];//动画队列
+    var fireing = false;//动画锁
+    var first = true;//通过add接口触发
+    var getStyle = function(obj,attr){
+        return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj,false)[attr];
+    }
+    var makeAnim = function(element,options,func){
+        var width = options.width
+        element.style.webkitTransitionDuration = '2000ms';
+        element.style.webkitTransform = 'translate3d(' + width +'px,0,0)';
+        //监听动画完结
+        element.addEventListener('webkitTransitionEnd',function(){
+            func()
+        })
+    }
+
+    var _fire = function(){
+        //加入动画正在触发
+        if(!fireing){
+            var onceRun = queue.shift();
+            if(onceRun){
+                fireing = true;
+                //next
+                onceRun(function(){
+                    fireing = false;
+                    _fire();//递归，循环判断调用，知道动画全部完成
+                })
+            }else{
+                fireing = true;//动画锁锁上表示不再执行动画，动画已全部完成
+            }
+        }
+    }
+
+
+    return self = {
+        //增加队列
+        add:function(element,options){
+            queue.push(function(func){
+                makeAnim(element, options,func)
+            });//把回调函数放进队尾
+            if(first && queue.length){
+                first = false;
+                self.fire();
+            }
+        },
+        fire:function(){
+            _fire();
+        }
+    }
+}();
+
+    aquery.fn = aquery.prototype = {
+        run: function(options){
+            animation.add(this.element,options);
+            return this;
+        }
+    }
+
+    var init = aquery.fn.init = function(selector){
+        var match = rquickExpr.exec(selector);
+        var element = document.getElementById(match[1]);
+        this.element = element;
+        return this;
+    }
+
+    init.prototype = aquery.fn;
+    return aquery;
+
+}());
+//dom
+var oDiv = document.getElementById('div1');
+
+//调用
+oDiv.onclick = function() {
+    $('#div1').run({
+        'width': '500'
+    }).run({
+        'width': '300'
+    }).run({
+        'width': '1000'
+    });
+};
+
+function foo(){
+    var a = 2;
+
+    function bar(){
+        console.log(a);
+    }
+
+    return bar;
+}
+var baz = foo();
+
+//baz();
+function foo() {
+    var a = 2;
+
+    function baz() {
+        console.log( a ); // 2
+    }
+
+    bar( baz );
+}
+
+function bar(fn) {
+    fn(); // 看妈妈，我看到闭包了！
+}
+
+
+
+var
+  obj1 = {value: 1},
+  obj2 = {value: 2},
+  obj3 = {value: 3};
+var ValueAccumulator = function(){
+    var values = [];
+    var accumulate = function(obj){
+        if(obj){
+            values.push(obj.value);
+            return values;
+        }else{
+            return values;
+        }
+    }
+    // alert(typeof(accumulate));
+    return accumulate;//返回的是函数，引用类型，是一个指针，不是某个值
+}
+
+// alert(typeof(ValueAccumulator))//返回的是整个函数表达式
+// alert(typeof(ValueAccumulator()))
+var accumulator = ValueAccumulator();//返回的是accumulate的值,而accumulate代表的是一个函数
+console.log(accumulator)
+var objects = [obj1,obj2,obj3];
+objects.forEach(accumulator);
+console.log(accumulator())
+//自调用函数实际上是高阶函数的一种形式，高阶函数就是以其他函数为输入，或者返回一个函数为输出的函数
+//高阶函数在传统的编程中并不常见，当命令式程序员使用循环来迭代数组的时候
+//纯函数返回的计算结果仅与传入的参数相关，这里不会使用外部的变量和全局状态，并且没有副作用，换句话说就是不能改变作为输入传入的变量，所以，程序里只能使用纯函数返回的值。
+
+//纯函数与非纯函数
+var printCenter = function(str){
+    var elem = document.createElement('div');
+    elem.textContent = str;
+    elem.style.position = 'absolute';
+    elem.style.top = (window.innerHeight) / 2 + 'px';
+    elem.style.left = (window.innerWidth - elem.style.width) / 2 + 'px';
+    document.body.appendChild(elem);
+};
+// printCenter('hello world!');
+//纯函数完成相同的事情
+var printSomewhere = function(str,height,width){
+    var elem = document.createElement('div');
+    elem.textContent = str;
+    elem.style.position = 'absolute';
+    elem.style.left = width +'px';
+    elem.style.top = height+'px';
+    return elem;
+}
+// document.body.appendChild(printSomewhere('hello world!',window.innerHeight / 2 + "px",window.innerWidth / 2  + "px"))
+//非纯函数依赖window对象的状态来计算宽度和高度，自给自足的纯函数则要求这些值作为参数传入，实际上它就允许了信息打印到任何地方，这也让这个函数有了更多用途。
+
+var message = ['hi','hello','sup'];
+message.map(function(s,i){
+    return printSomewhere(s,(100 * i * 10),(100 * i * 10));
+}).forEach(function(element){
+    document.body.appendChild(element);
+})
+//写匿名函数的标准方式
+// functioin(){
+//     return "hello world!"
+// };
+var anon = function(x,y){
+    return x + y
+};
+//匿名函数用于代替具名回调函数，这是匿名函数的一个更常见的用处
+// setInterval(function(){
+//     console.log(new Date().getTime())
+// },1000);
+//匿名函数和高阶函数配合使用的例子
+function powersOf(x) {
+ return function(y) {
+  // this is an anonymous function!
+  return Math.pow(x, y);
+ };
+}
+powerOfTwo = powersOf(2);
+console.log(powerOfTwo(1)); // 2
+console.log(powerOfTwo(2)); // 4
+console.log(powerOfTwo(3)); // 8
+powerOfThree = powersOf(3);
+console.log(powerOfThree(3)); // 9
+console.log(powerOfThree(10)); // 59049
+
+var values = (function(){
+    var values = [];
+    return function(obj){
+        if(obj){
+            values.push(obj.value);
+            return values;
+        }else{
+            return values;
+        }
+    }
+})();//自执行
+
+// values = do ->
+// valueList = []
+// (obj) ->
+// valueList.push obj.value if obj
+// valueList
+// console.log(values(obj1))
+var arr = [1,2,3,4];
+
+//使用递归函数时必须十分小心地避免无限循环(无限递归)。就像循环一样必须有个停止条件。这叫做基准情形(base case)
+var foo = function(n){
+    if(n==0){
+        return 1;
+    }else{
+        return n*foo(n-1);
+    }
+}
+console.log(foo(5));
+//递归和循环可以相互转换，但是递归算法往往更合适，甚至是必要的，因为有些情形用循环很费劲。一个明显的例子就是遍历树
+var getLeafs =function(node){
+    if(node.childNodes.length == 0){
+        return node.innerText;
+    }else{
+        return node.childNodes.map(getLeafs);
+    }
+}
+//递归不只是代替for和while循环的有趣的方式，有个叫分而治之
+//的算法，它递归地把问题拆分成更小的情形，直到小到可以解决，历史上的欧几里算法用于找出两个数的最大公分母
+function gcd(a,b){
+    if(b == 0){
+        return a;
+    }else{
+        return gcd(b,a % b);
+    }
+}
+console.log(gcd(12,8));
+console.log(gcd(100,20));
+
+
+//快排
+function qs(list){
+    if(!list||!list.slice||!list.length){
+        return list;
+    }
+    var first = list[0];
+    var rest = list.slice(1);
+    var smaller = qs(rest.filter(function(x){
+        return x < first;
+    }));
+    var bigger = qs(rest.filter(function(x){
+        return x > first;
+    }))
+    return smaller.concat(first).concat(bigger);
+
+}
+   var arr = [1,2,5,4,3,6,7];
+   console.log(qs(arr));
+
+
+// var findNode = function createNode(currNode){
+//     return function(key){
+//         while(currNode.data != key){
+//             currNode = currNode.next;
+//         }
+//         return currNode;
+//     }
+// }(headNode);
+
+// function createNode(data){
+//     this.data = data;
+//     this.next = null;
+// }
+// //初始化头部节
+// //从headNode开始形成一条链条
+// //通过next衔接
+// var headNode = new createNode("head");
+
+// //在链表中找到对应的节
+// var findNode = function createFindNode(currNode){
+//     return function(key){
+//         //循环找到执行的节，如果没有返回本身
+//         while(currNode.data != key){
+//             currNode = currNode.next;
+//         }
+//         return currNode;
+//     }
+// }(headNode);
+
+// this.insert = function(data,key){
+//     //创建一个新节
+//     var newNode = new createNode(data);
+//     //在链条中找到对应的数据节
+//     //然后把新加入的挂进去
+//     var current = findNode(key);
+//     newNode.next = current.next;
+//     current.next = newNode;
+// }
+
+// var findPrevious = function(currNode){
+//     return function(key){
+//         while(!(currNode.next == null) && (currNode.next.data != key)){
+//             currNode = currNode.next;
+//         }
+//         return currNode;
+//     }
+// }(headNode);
+
+
+// //插入方法
+// this.remove = function(key){
+//     var prevNode = findPrevious(key);
+//     if(!prevNode.next == null){
+//         //修改链表关系
+//         prevNode.next = prevNode.next.next;
+//     }
+// }
+
+    //////////
+    //创建链表 //
+    //////////
+    function createLinkList() {
+
+        //创建节
+        function createNode(data) {
+            this.data = data;
+            this.next = null;
+        }
+
+        //初始化头部节
+        //从headNode开始形成一条链条
+        //通过next衔接
+        var headNode = new createNode("headNode");
+
+        //在链表中找到对应的节
+        var findNode = function createFindNode(currNode) {
+            return function(key) {
+                //循环找到执行的节，如果没有返回本身
+                while (currNode.data != key) {
+                    currNode = currNode.next;
+                }
+                return currNode;
+            }
+        }(headNode);
+
+        //找到前一个节
+        var findPrevious = function(currNode) {
+            return function(key) {
+                while (!(currNode.next == null) &&
+                    (currNode.next.data != key)) {
+                    currNode = currNode.next;
+                }
+                return currNode;
+            }
+        }(headNode);
+
+
+        //插入一个新节
+        this.insert = function(data, key) {
+            //创建一个新节
+            var newNode = new createNode(data);
+            //在链条中找到对应的数据节
+            //然后把新加入的挂进去
+            var current = findNode(key);
+            //插入新的接，更改引用关系
+            //1:a-b-c-d
+            //2:a-b-n-c-d
+            newNode.next = current.next;
+            current.next = newNode;
+        };
+
+        //插入方法
+        this.remove = function(key) {
+            var prevNode = findPrevious(key);
+            if (!(prevNode.next == null)) {
+                //修改链表关系
+                prevNode.next = prevNode.next.next;
+            }
+        };
+
+
+        this.display = function(fn) {
+            var currNode = headNode;
+            while (!(currNode.next == null)) {
+                currNode = currNode.next;
+                fn(currNode.data);
+            }
+        };
+
+    }
+
+
+    var cities = new createLinkList();
+
+    function create() {
+        var text = '';
+        cities.display(function(data) {
+            text += ' ' + data;
+        });
+        var div = document.createElement('div')
+        div.innerHTML = text;
+        document.getElementById("listshow").appendChild(div)
+    }
+
+    document.getElementById("test1").onclick = function() {
+        cities.insert("Conway", "headNode");
+        cities.insert("Russellville", "Conway");
+        cities.insert("Carlisle", "Russellville");
+        cities.insert("Alma", "Carlisle");
+        create();
+    }
+
+    document.getElementById("test2").onclick = function() {
+        cities.remove("Russellville");
+        create()
+    }
+
+
+//串是由零个或多个字符组成的有限序列，又叫做字符串
+//串的逻辑结构和线性表很相似的，不同的是串针对是字符集，所以在操作上与线性表还是有很大区别的，线性表更关注的是单个元素的操作CURD，串则是关注查找字串的位置，替换等操作。
+//当然不同的高级语言对串的基本操作都有不同的定义方法，但是总的来说操作的本质都是相似的，比如js的查找就是indexof，去空白就是trim，转化大小写lolowercase/touppercase
+//这里主要讨论字符串模式匹配的几种经典的算法，BF,BM,KMP]
+//BF BRUTE FORCE
+//BF算法的基本思想
+//从目标串s的第一个字符起和模式串t的第一个字符进行比较，若相等，则继续逐个比较后续字符，否则从串s的第二个字符起再重新和串t进行比较。
+//
+var sourceStr = "BBC ABB ABCF";
+var searchStr= "ABC";
+function BF_Ordinary(sourceStr,searchStr){
+    var sourceLength = sourceStr.length;
+    var searchLength = searchStr.length;
+    var padding = sourceLength - searchLength;
+    //BBC ABB ABCF =>ABC =>搜索9次
+    for(var i = 0; i<=padding;i++){
+        //如果满足了第一个charAt是相等的
+        //开始子循环检测
+        //其中sourceStr的取值是需要叠加i的值
+        if(sourceStr.charAt(i) == searchStr.charAt(0)){
+            //匹配成功的数据
+            var complete = searchLength
+        }
+    }
+}
+
+
+
+function heavyCompute(n){
+    var count = 0,
+    i,j;
+
+    for(i = n; i > 0; --i){
+        for(j = n; j > 0; --j){
+            count+=1
+        }
+    }
+
+}
+var t = new Date();
+
+setTimeout(function(){
+    console.log(new Date() - t);
+},1000);
+
+heavyCompute(50000);
+
+
+
+</script>
+</body>
+</html>
+
+
