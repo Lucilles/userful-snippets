@@ -57,14 +57,6 @@ $('.bar').on('click',function(e){
     $('.bar').removeClass('dis_none');
 });
 
-// 设置手机屏幕中间内容的高度
-var vh = window.document.documentElement.getBoundingClientRect().height;
-var ifvh = vh - $('.header').height() - $('.yCmsContentSlot').height();
-$('#iframe').height(ifvh);
 
-//去掉select选择框重复的第一个类别option
- $('.tip2 select').mouseover(function(){
-    $(this).find('.more').hide(0);  //more为第一个option的类名                 
- })
 
 
