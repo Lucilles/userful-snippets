@@ -67,4 +67,59 @@ $('#iframe').height(ifvh);
     $(this).find('.more').hide(0);  //more为第一个option的类名                 
  })
 
+//验证正确的手机号码格式
+//input失去焦点验证姓名手机号是否为空
+        $('.name').blur(function(){
+            if($(this).val()!=""){
+                $('#warn-info-name').addClass('dis_none');
+            }else{
+                $('#warn-info-name').removeClass('dis_none')
+            }
+        })
+        $('.tel').blur(function(){
+            var phone = $('.tel').val();
+            if((/^1[34578]\d{9}$/.test(phone))){
+                $('#warn-info-phone').addClass('dis_none');
+            }else{
+                $('#warn-info-phone').removeClass('dis_none')
+            }
+        })
+        if( !($('.name').val()!="" && (/^1[34578]\d{9}$/.test(phone)))){
+            return;
+        }
+        //点击立即预约按钮验证姓名及手机号格式
+        $('.btn3').on('click',function(e){
+            e.preventDefault();
+            var phone = $('.tel').val();
+            if($('.name').val()==""){
+                $('#warn-info-name').removeClass('dis_none');
+                return;
+            }
+            if(!(/^1[34578]\d{9}$/.test(phone))){
+                $('#warn-info-phone').removeClass('dis_none');
+                return;
+            }
+            $('.modal_content').hide();
+            $('.submit-success').removeClass('dis_none');
+        })
+
+        //阻止手机端软键盘弹出高度缩小
+        function showform() {
+            $(".mobilecontent").height($(window).height()-48);
+        }
+            //弹出表单页面
+        $('.btn').on('click',function(){
+            $('html,body,mobilecontent').css({'overflow':'hidden'});
+            showform();
+        })
+        //点击空白隐藏表单
+        $('.modal_form').on('click',function(e){
+            e.preventDefault();
+            //隐藏弹出框并重置表单数据
+            reset();
+            $('html,body,mobilecontent').css({'overflow':'visible'});
+            $('.mobilecontent').css({'height':'auto'});
+        });
+
+
 
