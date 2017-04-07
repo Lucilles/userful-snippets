@@ -121,5 +121,13 @@ $('#iframe').height(ifvh);
             $('.mobilecontent').css({'height':'auto'});
         });
 
-
-
+//注释信息开头
+/**
+ * Created by lenovo on 2017/3/14.
+ */
+/**
+ *@filename:alert.js
+ *@author:YanPei
+ *@time:2017/3/14
+ *@disc: 弹层信息
+ */
