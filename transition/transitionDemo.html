@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transitionDemo</title>
+	<style>
+.dis_inline{
+	display: inline-block;
+}
+.play {
+	width: 200px;
+	height: 163px;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+a.box{
+	display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    left: 50%;
+    margin-left: -15px;
+}
+.play span.line {
+	height: 2px;
+	position: absolute;
+	display: block;
+	background: #000;
+	-webkit-transform-origin: left top;
+	-moz-transform-origin: left top;
+	-ms-transform-origin: left top;
+	-o-transform-origin: left top;
+	transform-origin: left top;
+}
+
+.play span.line1 {
+    width: 0px;
+    opacity: 0;
+    top: 2px;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+	transition:.2s .4s;
+}
+
+.play span.line2 {
+	top: 30px;
+	width: 0px;
+	opacity: 0;
+	margin-left: -2px;
+	-webkit-transform: rotate(-32deg);
+	-moz-transform: rotate(-32deg);
+	-ms-transform: rotate(-32deg);
+	-o-transform: rotate(-32deg);
+	transform: rotate(-32deg);
+	transition:.2s .2s;
+}
+
+.play span.line3 {
+	top: 17px;
+	width: 0px;
+	opacity: 0;
+	margin-left: 22px;
+	-webkit-transform: rotate(212deg);
+	-moz-transform: rotate(212deg);
+	-ms-transform: rotate(212deg);
+	-o-transform: rotate(212deg);
+	transform: rotate(212deg);
+	transition:.2s;
+}
+img{
+	width: 100%;
+	transition:all 2s;
+}
+.play:hover img{
+	transform:scale(1.5);
+}
+.play:hover span.line1{
+	width: 29px;
+	opacity: 1;
+	transition:width .2s,opacity .2s;
+}
+.play:hover span.line2{
+	width: 29px;
+	opacity: 1;
+	transition:width .2s .2s,opacity .2s;			
+}
+.play:hover span.line3{
+	width: 29px;
+	opacity: 1;
+	transition:width .2s .4s,opacity .2s;
+}
+.play span.detail{
+	position: absolute;
+    bottom: -20px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    transition:.8s;
+}
+.play:hover span.detail{
+	bottom:20px;
+}
+.play:hover div.modal{
+	opacity:0;
+	transition:1s;
+}
+
+/*放大缩小效果*/
+
+.play1{
+	position: relative;
+	width: 200px;
+	height: 163px;
+	margin-top: 40px;
+	overflow: hidden;
+
+}
+.play1 img{
+	max-width: 100%;
+	transition:1s;
+}
+.play1 .borders{
+	border-style:solid;
+	border-color:#000;
+	border-width: 1px; 
+	margin:0 auto;
+	height: 26px; 
+	width: 120px;
+	position: absolute;
+    transition: 1s;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    margin-top: -14px;
+    margin-left: -60px;
+    overflow: hidden;
+}
+.play1 span.underline{
+    width: 94px;
+    height: 1px;
+    background: #000;
+    position: absolute;
+    left: 50%;
+    margin-left: -47px;
+    bottom: -80px;
+    transition: 1.5s;
+    opacity: 0;
+}
+.play1 span.title{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	margin-top: -8px;
+	font-size: 11px;
+	letter-spacing: 0.075em;
+}
+.play1:hover .borders{
+	display: block; 
+	border-width: 2px; 
+	margin-top: -38px; 
+	margin-left: -80px; 
+	height: 74px; 
+	width: 160px;
+	transition:1s;
+}
+.play1:hover .borders .underline{
+	bottom:25px;
+	opacity: 1;
+}
+.play1:hover img{
+	transform:scale(1.5);
+}
+
+/*遮罩层效果*/
+#picture{
+	width: 200px;
+	height: 163px;
+	overflow: hidden;
+	cursor: pointer;
+	position: relative;
+
+}
+#picture img{
+	width: 100%;
+	height: 100%;
+	display: block;
+	transition:1s linear 2s;
+}
+#modal{
+	width: 100%;
+	height: 100%;
+	line-height: 300px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background:rgba(100,0,0,.8);
+	opacity: 0; 
+	transition:1s linear 2s;
+
+}
+#modal .button{
+width: 50%;
+left: 25%;
+height: 30px;
+top: 50%;
+margin-top: -15px;
+color: #fff;
+border: 1px solid #fff;
+text-align: center;
+line-height: 30px;
+position: absolute;
+text-decoration: none;
+font-size: 12px;
+}
+#picture:hover img{
+	transform:scale(2);
+	transition:1s linear;
+}
+#picture:hover #modal{
+	opacity: 1;
+	transition:1s linear;
+}
+
+
+
+
+
+
+/*3d按钮翻转效果*/
+.button3d {
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  margin-left:10px;
+  cursor: pointer;
+  perspective: 500px;
+  -webkit-perspective: 500px;
+}
+
+.button3d div {
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition:1s ease-out;
+}
+
+.button3d:hover div.up{
+  transform: rotateX(90deg);
+  transition:1s ease-out;
+}
+.button3d:hover a.downup:before {
+	z-index:3;
+}
+a.downup,a.updown {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro',sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  display: block;
+}
+
+a.downup:before {
+  content:attr(title);
+  color: #000;
+  background: #CEEB0E;
+  transform:rotateX(-90deg) translate3d(0, 0, 25px);
+  -webkit-transform:rotateX(-90deg) translate3d(0, 0, 25px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+a.downup:after {
+  content:attr(title);
+  color: #094b2c;
+  background: #77EE63;
+  transform: translate3d(0, 0, 25px);
+  -webkit-transform: translate3d(0, 0, 25px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index:2;
+}
+.button3d:hover div.down {
+  transform: rotateX(-90deg);
+  transition:1s ease-out;
+}
+.button3d:hover a.updown:after{
+	z-index: 3;
+}
+a.updown:before {
+  color: #000;
+  background: #CEEB0E;
+  transform: translate3d(0, 0, 25px);
+  -webkit-transform:translate3d(0, 0, 25px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+/*  border: 2px solid #000;*/
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: attr(title);
+  z-index: 2;
+}
+
+a.updown:after {
+  color: #094b2c;
+  background: #77EE63;
+  transform:rotateX(90deg) translate3d(0, 0, 25px);
+  -webkit-transform:rotateX(90deg) translate3d(0, 0, 25px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: attr(title);
+/*  border: 2px solid #000;*/
+}
+
+
+	</style>
+<!-- <script src="../jquery1.11.js"></script> -->
+</head>
+<body>
+
+	<div class="play dis_inline">
+	<img src="pic11.jpg" alt="">
+	<a href="" class="box">
+		<span class="line1 line"></span>
+		<span class="line2 line"></span>
+		<span class="line3 line"></span>
+		</a>
+		<span class="detail">GRETA HELLO</span>
+	</div>
+
+
+<!-- 放大缩小效果 -->
+ <div class="play1 dis_inline">
+<img src="pic11.jpg" alt="">
+		<p class="borders">
+		<span class="title">GRETA HELLO</span>
+		<span class="underline"></span>
+		</p>
+</div> 
+
+<!-- 遮罩层效果 -->
+	<div id="picture" class="dis_inline">
+		<img src="pic11.jpg" alt="">
+		<div id="modal">
+			<a href="http://www.icolor.com.cn" class="button">立即邀约</a>
+		</div>
+	</div>
+
+
+<!-- 3d按钮翻转效果 -->
+<!-- 从上往下 -->
+<div class="button3d dis_inline">
+  <div class="up">
+	<a href="http://www.icolor.com.cn" class="downup" title="立即邀约" target="_blank">立即邀约</a>
+  </div>
+</div>
+<!-- 从下往上 -->
+<div class="button3d dis_inline">
+  <div class="down">
+	<a href="http://www.icolor.com.cn" class="updown" title="立即邀约" target="_blank">立即邀约</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

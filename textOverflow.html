@@ -2,15 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">  
 <head>  
     <title></title>  
-    <script src="../jquery1.11.js" type="text/javascript"></script>  
+    <script src="jquery.min.js" type="text/javascript"></script>  
     <script type="text/javascript">  
     $(function () {  
         $(".container").each(function (i) {  
             var divH = $(this).height();  
+            var text = $('p').html();
+            console.log(text);
             var $p = $("p", $(this)).eq(0);  
             while ($p.outerHeight() > divH) {  
                 $p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));  
-            };  
+            };
+            console.log(text);  
         });  
         });  
     </script>  
