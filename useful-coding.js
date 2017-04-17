@@ -1,3 +1,12 @@
+/**
+ * Created by lenovo on 2017/4/12.
+ */
+/**
+ *@filename:useful-coding.js
+ *@author:LuoWen
+ *@time:2017/4/12
+ *@disc: JS_snippets
+ */
 
 //顶部导航栏浮窗实现
 $(function(){
@@ -120,14 +129,137 @@ $('#iframe').height(ifvh);
             $('html,body,mobilecontent').css({'overflow':'visible'});
             $('.mobilecontent').css({'height':'auto'});
         });
+        //表单提交验证是否填写信息
+        function validateForm($obj,warnId){
+            var value = $($obj).val();
+            if(value){
+                $('#'+warnId).hide();
+            }else{
+                $('#'+warnId).show();
+            }
+        }
 
-//注释信息开头
-/**
- * Created by lenovo on 2017/3/14.
- */
-/**
- *@filename:alert.js
- *@author:YanPei
- *@time:2017/3/14
- *@disc: 弹层信息
- */
+
+//手机端自适应
+//iphone5
+@media only screen and (min-width:310px) and (max-width: 370px) {
+    .goods-lines1-left a img.zl_autoImg{
+      width: 154px;
+      height: 154px;
+    }
+}
+//iphone6
+@media only screen and (min-width:370px) and (max-width: 410px) {
+    .goods-lines1-left a img.zl_autoImg{
+      width: 180px;
+      height: 180px;
+    }
+}
+//iphone 6plus
+@media only screen and (min-width:410px) and (max-width: 470px){
+    .goods-lines1-left a img.zl_autoImg{
+      width: 199px;
+      height: 199px;
+    }
+}
+
+
+//表单提交
+var  qsData={};
+function submitData(nameId, phoneNumberId,nameWarnInfoId,phoneNumberWarnInfoId ){
+
+    qsData={};
+    /*��ȡ�û��������ݲ���֤*/
+    var $name = $("#"+nameId);
+    var $phoneNumber = $("#"+phoneNumberId);
+    var name = $name.val();
+    var phone = $phoneNumber.val();
+    if(!name){
+        $("#"+nameWarnInfoId).show();
+    }
+    if(!(/^1[34578]\d{9}$/.test(phone))){
+        $("#"+phoneNumberWarnInfoId).show();
+    }
+    if( !( name && (/^1[34578]\d{9}$/.test(phone))) ){
+        return;
+    }
+    /*�������� ��������*/
+    qsData.mobile = phone;
+    qsData.name = name + '-429';
+    /*�������ԤԼ��ť �ύ����*/
+    xdf.send('s1',qsData);
+    $name.val("");
+    $phoneNumber.val("");
+}
+//�ύ���ݺ���
+var xdf=new XDF({
+    url:{
+        s1:'https://qatest.icolor.com.cn/htmlForm/submitform'
+        //s2:'https://adc.icolor.com.cn/htmlForm/submitformsecond'
+    },
+    urlCallback:{
+        s1:function(data){
+            xdf.netOk();
+            xdf.admitOk();
+            if(data.status =='err'){
+                console.log(data.msg);
+                return;
+            }
+            else{
+                $(".form").hide();
+                $(".form-submit-success").show();
+                $(".form-bg").off("click").on("click", function () {
+                    $(this).hide()
+                    $(".form-submit-success").hide();
+                    $(".ic-side").show();
+                    $("html").css("overflow","visible");
+                    $("body").css("overflow","visible");
+                })
+            }
+        },
+        s2:function(data){
+        }
+    }
+});
+
+
+//失去焦点时判断验证信息
+//  js
+function chk(obj,warnId) {
+    var value=$(obj).val();
+    if(value){
+        $("#"+warnId).hide();
+    }
+    else {
+        $("#"+warnId).show();
+    }
+}
+//  html
+<input type="text" placeholder="您的称呼" id="txtName2" onblur="chk(this,'lbName2')"/>
+<p class="name-warn-info warn-info" id="lbName2"> ! 请输入您的称呼</p>
+
+
+
+
+
+//根据屏幕大小设置缩放的值
+    function setHTML() {
+        var clientWidth = document.documentElement.clientWidth,
+            scale = clientWidth / 1200;
+        if (scale < 1) {
+            document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=1200, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=0');
+        }
+
+    }
+    setHTML();
+
+//设置图片居中
+.ic-index-kv .carousel .item iframe {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+
