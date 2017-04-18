@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+//冒泡排序
+var tempArr = [1,4,3,2,4,5,4,3,2,7,8,9];
+var obj = {time:0}
+function bubble(arr){
+	var l = arr.length;
+	for(var i = 0;i<l-1;i++){
+		for(var j = i+1;j<l;j++){
+			if(arr[i]>arr[j]){
+				var temp = arr[j];
+				arr[j] = arr[i];
+				arr[i] = temp;
+			}
+			obj.time++;
+		}
+	}
+	obj.arr = arr;
+	return obj;
+}
+console.log(bubble(tempArr));
+
+//快速排序
+function qs(list){
+	if(!list||!list.slice()||!list.length){
+		return list;
+	}
+	var first = list[0];
+	var rest = list.slice(1);
+	var smaller = qs(rest.filter(function(x){
+		return x<first;
+	}));
+	var bigger = qs(rest.filter(function(x){
+		return x>first;
+	}));
+	return smaller.concat(first).concat(bigger);
+}
+
+var tempStr = 'asdfsdfsdfsdkfdifadsfasdfe';
+function conutStr(str){
+	var obj = {};//把计算好的放进一个对象里面
+	for(var i = 0,l = str.length;i<l;i++){
+		if(obj.hasOwnProperty(str[i])){
+			obj[str[i]]++;
+		}else{
+			obj[str[i]] = 1;
+		}
+	}
+	return obj;
+}
+console.log(countStr(tempStr));
+
+//判断字符串出现最多的字符并统计次数
+var tempStr = 'adddfsdadgreegsdgsfgdfsd';
+function countStr(str){
+	var obj = {};
+	for(var i = 0;i<str.length;i++){
+		console.log(obj);
+		if(obj.hasOwnProperty(str[i])){
+			obj[str[i]]++;
+		}else{
+			obj[str[i]] = 1;
+		}
+	}
+	return obj;
+}
+console.log(countStr(tempStr));
+
+var tempStr = 'sgdgdfeadfsdgfdgd';
+function countStr(str){
+	var obj = {};
+	for(var i = 0;i<str.length;i++){
+		if(obj.hasOwnProperty(str[i])){
+			obj[str[i]]++;
+		}else{
+			obj[str[i]] = 1;
+		}
+	}
+	return obj;
+}
+console.log(conutStr(tempStr));
+
+var arr1 = [1,2,3,4,5,6,6,5,9];
+var unique1 = function(arr){
+	//返回新数组
+	var temp = [];
+	for(var i = 0;i<arr.length;i++){
+		if(temp.indexOf(arr[i]) === -1){
+			temp.push(arr[i])
+		}
+	};
+	return temp;
+}
+console.log(unique1(arr1));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

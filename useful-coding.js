@@ -261,5 +261,30 @@ function chk(obj,warnId) {
 }
 
 
+//阻止ajax多次提交
+$(function(){
+    var one = true;//变量锁
+    var data={
+        name:$('#name').val(),
+        tel:$('#tel').val()
+    }
+    $('#submit').click(function(){
+        if(one){
+            $.ajax({
+                url:'userInfo.json',
+                data:data,
+                dataType:'json',
+                type:'post',
+                success:function(data){
+                    console.log('success!')
+                },
+                error:function(){
+                    console.log("error!")
+                }
+            });
+            one = false;
+        }
+    })
 
+})
 
