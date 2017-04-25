@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="swiper.min.css">
-
     <!-- Demo styles -->
     <style>
-    html, body {
-        position: relative;
-        height: 100%;
-    }
-    .scrollImg{
-    height:542px;
-    width: 1200px;
+html, body {
+    position: relative;
+    height: 100%;
+}
+.scrollImg{
+height:542px;
+width: 1200px;
+overflow: hidden;
+margin: 0 auto;
 }
 .smallImg{
     height: 100%;
@@ -32,6 +33,15 @@ text-align: center;
 .bigImg{
     width: 852px;
     float: left;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+.bigImg li{
+    width: 850px;
+    height: 540px;
+    overflow: hidden;
+    position: relative;
 }
 .smallImg .swiper-button-next{
     background:url(images/arrow_next.png); 
@@ -47,21 +57,39 @@ text-align: center;
     left: 116px;
     top: 30px;
 }
-    
+.swiper-slide-active img{
+    border: 3px solid #fad97f;
+}
+.smallimg{
+    position: absolute;
+    bottom: -110px;
+}
+.bigImg li:hover .smallimg{
+    bottom:0;
+    transition:bottom .5s linear;
+}
+.bigImg .active{
+    display: block;
+ }   
     </style>
 </head>
 <body>
     <!-- Swiper -->
        <div class="scrollImg clearfix">
-        <div class="bigImg">
-            <img src="images/list2-11.jpg" alt="">
-        </div>
+       <ul class="bigImg">
+           <li class=""><img src="images/list1-11.jpg" class="bigimg">
+            <img src="images/list1-12.png" alt="" class="smallimg"></li>
+           <li><img src="images/list1-21.jpg" class="bigimg">
+            <img src="images/list1-22.png" alt="" class="smallimg"></li>
+            <li><img src="images/list1-31.jpg" class="bigimg">
+            <img src="images/list1-32.png" alt="" class="smallimg"></li>
+       </ul>
         <div class="smallImg">
             <div class="swiper-container swiper-container3">
             <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="images/list2-1.jpg"/></div>            
-                    <div class="swiper-slide"><img src="images/list2-2.jpg"/></div>            
-                    <div class="swiper-slide"><img src="images/list2-3.jpg"/></div>            
+                    <div class="swiper-slide"><img src="images/list1-1.jpg"/></div>            
+                    <div class="swiper-slide"><img src="images/list1-2.jpg"/></div>            
+                    <div class="swiper-slide"><img src="images/list1-3.jpg"/></div>            
             </div>
         </div>
         <!-- Add Arrows -->
@@ -69,34 +97,42 @@ text-align: center;
         <div class="swiper-button-prev"></div>
     </div>
     </div>
-
     <!-- Swiper JS -->
- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="swiper.min.js"></script>
-
     <!-- Initialize Swiper -->
     <script>
     $(function(){
-                    //垂直轮播图
-            var swiper = new Swiper('.swiper-container3', {
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                direction: 'vertical',
-                slidesPerView: 3,
-                paginationClickable: true,
-                spaceBetween: 30,
-                mousewheelControl: true,
-                loop:true,
-                });
-            $('.swiper-container3 .swiper-slide img').on('click',function(){
-                var imgSrc = $(this).attr('src');
-                // console.log(imgSrc);
-                var img = imgSrc.split('.')[0]+ '1.jpg';
-                $('.bigImg').find('img').attr('src',img);
+        //垂直轮播图
+        var swiper = new Swiper('.swiper-container3', {
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            direction: 'vertical',
+            slidesPerView: 3,
+            paginationClickable: true,
+            spaceBetween: 30,
+            mousewheelControl: true,
+            loop:true,
+            autoplay:5000,
+            onSlideChangeEnd:function(swiper){
+                var index=$('.swiper-slide-duplicate-active').data('swiper-slide-index');
+                $('.bigImg li').hide();
+                $('.bigImg li').eq(index).fadeIn(1000);
+                }
             });
+        $('.swiper-slide').click(function(){
+            $('.swiper-slide').removeClass('swiper-slide-active');
+            $(this).addClass('swiper-slide-active');
+            var index=$('.swiper-slide-active').data('swiper-slide-index');
+                $('.bigImg li').hide();
+                $('.bigImg li').eq(index).fadeIn(1000);
+        })
+        $('.scrollImg').hover(function(){
+            swiper.stopAutoplay();
+        },function(){
+            swiper.startAutoplay();
+        })
     })
-
-
     </script>
 </body>
 </html>
