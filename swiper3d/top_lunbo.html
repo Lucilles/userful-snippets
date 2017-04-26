@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+.container{
+position: relative;
+overflow: hidden;
+height: 450px;
+display: inline-block;
+width: 230px;
+float: left;
+}
+.imgs{
+position:absolute;
+width:100%;
+left:0;
+top:0;
+color:#000;
+margin:0;
+padding:0;
+}
+.imgs li{
+	width: 220px;
+	height: 130px;
+	margin-bottom: 30px;
+}
+.container_left{
+position: relative;
+overflow: hidden;
+height: 130px;
+width: 750px;
+display: inline-block;
+}
+.container_left .imgs_left{
+position:absolute;
+width: 1750px;
+left:0;
+top:0;
+color:#000;
+margin:0;
+padding:0;
+}
+.imgs_left li{
+	width: 220px;
+	height: 130px;
+	display: inline-block;
+	margin-right: 30px;
+	float: left;
+}
+.imgs_left li img{
+	display: inline-block;
+}
+.active{
+	border: 3px solid #fad97f;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<ul class="imgs">
+		<li class=""><img src="images/list1-1.jpg" alt=""></li>
+		<li class="two"><img src="images/list1-2.jpg" alt=""></li>
+		<li class="three"><img src="images/list1-3.jpg" alt=""></li>
+		<li class="four"><img src="images/list1-1.jpg" alt=""></li>
+		<li class="five"><img src="images/list1-2.jpg" alt=""></li>
+		<li class="six"><img src="images/list1-3.jpg" alt=""></li>
+	</ul>
+</div>
+<div class="container_left">
+	<ul class="imgs_left">
+		<li class="one"><img src="images/list1-1.jpg" alt=""></li>
+		<li class="two"><img src="images/list1-2.jpg" alt=""></li>
+		<li class="three"><img src="images/list1-3.jpg" alt=""></li>
+		<li class="four"><img src="images/list1-1.jpg" alt=""></li>
+		<li class="five"><img src="images/list1-2.jpg" alt=""></li>
+		<li class="six"><img src="images/list1-3.jpg" alt=""></li>
+	</ul>
+</div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+	// 向上移动
+	function autoplay(){
+	   var parent = $('.imgs');
+	   // var first = $('.imgs').find('li').eq(0).removeClass('active'); 
+	   	   var first = $('.imgs').find('li').eq(0); 
+	   // $('.imgs').find('li').eq(1).addClass('active');
+	   first.animate({
+	   	marginTop:'-160px'},500,function(){
+	   		first.css({'margin-top':0}).appendTo(parent); 
+	   });
+	}
+	//autoplay();
+   	setInterval(function(){
+		autoplay();	
+  	},2000);
+
+// 	var doscroll = function(){
+//      var $parent = $('.imgs');
+//      var $first = $parent.find('li:first');
+//      var height = $first.height()+30;
+//      $first.animate({
+//          marginTop: -height + 'px'
+//          }, 500, function() {
+//          $first.css('marginTop', 0).appendTo($parent);
+//      });    
+// };
+// setInterval(function(){doscroll()}, 2000);
+
+// 向右移动
+	var doscrollLeft = function(){
+     var $parent = $('.imgs_left');
+     var $first = $parent.find('li:first');
+     var width = $first.width()+30;
+     $first.animate({
+         marginLeft: -width + 'px'
+         }, 500, function() {
+         $first.css({'margin-left':'0px'}).appendTo($parent);
+     });    
+};
+setInterval(function(){doscrollLeft()}, 2000);
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>
