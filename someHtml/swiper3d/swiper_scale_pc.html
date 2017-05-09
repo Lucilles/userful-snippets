@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	    <link rel="stylesheet" href="swiper.min.css">
+        <script src="jquery1.11.js"></script>
+    <script src="swiper.min.js"></script>
+    <style>
+.ic-swiper {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  margin-top: 75px;
+  background: url("images/bg.jpg") center no-repeat;
+}
+.ic-swiper .ic-swiper-wrap {
+  position: relative;
+  height: 600px;
+}
+.swiper-slide{
+    transform: scaleX(1) scaleY(.815);
+}
+.swiper-slide-active{
+    transform:scale(1);
+    width: 624px!important;
+    height: 366px!important;
+  position: absolute;
+  z-index: 100;
+  margin-right: 0!important;
+  margin-left: -255px;
+}
+.swiper-slide-prev{
+  margin-right: 0!important;
+  width: 510px!important;
+}
+.swiper-slide-next{
+  margin-left: -240px;
+        width: 510px!important;
+}
+.ic-swiper .ic-swiper-wrap .ic-swiper-container .swiper-container {
+  width: 1144px;
+  margin: 0 auto;
+}
+.swiper-container {
+  width: 100%;
+  height: 366px;
+  margin: 20px auto;
+}
+.swiper-slide {
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  height: 364px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  overflow: hidden;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 500ms linear;
+  -moz-transition: 500ms linear;
+  -ms-transition: 500ms linear;
+  -o-transition: 500ms linear;
+  transition: 500ms linear;
+}
+.swiper-slide .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(254, 184, 44, 0.9);
+  color: #fff;
+  padding-top: 87px;
+  opacity: 0;
+  transition: 500ms linear;
+}
+.swiper-slide .cover p {
+  margin-bottom: 10px;
+}
+.swiper-slide .cover a {
+  display: block;
+  width: 168px;
+  height: 44px;
+  line-height: 42px;
+  color: #fff;
+  font-size: 14px;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin: 28px auto 0;
+  text-decoration: none;
+}
+.ic-swiper .ic-swiper-wrap .ic-swiper-container {
+    position: absolute;
+    bottom: 70px;
+    margin-left: 50px;
+}
+.swiper-pagination-bullet{
+	background: #8e8e8e;
+	margin-right: 5px;
+	width: 14px;
+	height: 14px;
+
+}
+.swiper-pagination-bullet-active{
+	background:#78dcd9;
+}
+.swiper-pagination{
+	left:50%;
+	bottom: -40px;
+}
+
+    </style>
+</head>
+<body>
+	        <div class="ic-swiper">
+            <div class="ic-swiper-wrap ic-center">
+                <div class="ic-swiper-container ic-center">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="images/3_03.jpg" alt="swiper_01"/>
+<!--                                 <div class="cover">
+                                    <p>东方卫视梦想改造家节目</p>
+                                    <p>夹缝中的家</p>
+                                    <a href="https://www.icolor.com.cn/design/designer/W147508/workshop">点击查看</a>
+                                </div> -->
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="images/2_03.jpg" alt="swiper_02"/>
+ <!--                                <div class="cover">
+                                    <p>上海万科驿</p>
+                                    <p>青年长租公寓</p>
+                                    <a href="https://www.icolor.com.cn/design/designer/W147508/workshop">点击查看</a>	
+                                </div> -->
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="images/1_03.jpg" alt="swiper_03"/>
+<!--                                 <div class="cover">
+                                    <p>天津远雄兰苑</p>
+                                    <p>A-2样板房</p>
+                                    <a href="https://www.icolor.com.cn/design/designer/W147508/workshop">点击查看</a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+         <script type="text/javascript">
+        //轮播图
+        var appendNumber = 5;
+        var prependNumber = 1;
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: 3,
+            centeredSlides: true,
+            paginationClickable: true,
+            spaceBetween: 30,
+            loop:true,
+            loopedSlides :5
+//            autoplay:true,
+//            speed:3000
+        });
+    </script>
+</body>
+</html>

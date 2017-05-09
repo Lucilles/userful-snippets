@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body onload="throwDice()">
+	<canvas id="mycanvas" width='400' height='300'></canvas>
+
+	<script>
+	var cwidth = 400;
+	var cheight = 300;
+	var x = 50;
+	var y = 50;
+	var w = 100;
+	var h = 100;
+	var radius = 6;
+	var ctx;
+	var firstturn = true;
+	var point;
+	//只有一个骰子时
+	// function init(){
+	// 	var ch = 1+Math.floor(Math.random()*6)//掷骰子的数量
+	// 	drawface(ch)//调用drawface函数并传入参数ch
+	// }
+	//有两个骰子时
+	// function throwCraps(){
+	// 	var ch = Math.floor(Math.random()*6);
+	// 	dx = x;
+	// 	dy = y;
+	// 	drawface(ch);
+	// 	console.log(ch);
+	// 	dx = x+150;
+	// 	dy = y;
+	// 	var ch1 = 1+Math.floor(Math.random()*6);
+	// 	console.log(ch1)
+	// 	drawface(ch1);
+	// 	var total = ch+ch1;
+	// 	console.log(total);
+	// 	if(total == 7 || total == 11){
+	// 		console.log('win');
+	// 	}else{
+	// 		console.log('lose');
+	// 	}
+	// }
+	// 添加条件判断和全局变量完善规则
+	function throwDice(){
+		var sum;
+		var ch = 1+Math.floor(Math.random()*6);
+		sum = ch;
+		dx = x;
+		dy = y;
+		drawface(ch);//绘制第一个骰子
+		dx = x +150;
+		dy = y;
+		ch = 1+Math.floor(Math.random()*6);//第一个骰子绘制之后，程序一步一步的运行，改变ch变量的值来绘制第二个骰子
+		sum += ch;//取得两个骰子数字的总和
+		drawface(ch);//绘制第二个骰子
+		if(firstturn){//判断是否第一次
+			switch(sum){
+				case 7:
+				case 11:
+				console.log('you win!');
+				break;
+				case 2:
+				case 3:
+				case 12:
+				console.log('you lose!');
+				break;
+				default://适用其他不满足上述的情况
+				point = sum;
+				firstturn = false;
+				console.log('need follow-up throw.');
+			}
+		}else{//判断不是第一次投掷的时候
+			switch(sum){
+				case point:
+				console.log('you win');
+				firstreturn = true;
+				break;
+				case 7:
+				console.log('you lose!');
+				firstturn =  true;
+			}
+		}
+	}
+	console.log(firstturn);
+	function drawface(n){
+		ctx = document.getElementById('mycanvas').getContext('2d');
+		ctx.lineWidth = 5;
+		ctx.clearRect(dx,dy,w,h);
+		ctx.strokeRect(dx,dy,w,h);
+		ctx.fillStyle = '#009966';
+		switch(n){
+			case 1:
+			draw1();
+			break;
+			case 2:
+			draw2();
+			break;
+			case 3:
+			draw2();
+			draw1();
+			break;
+			case 4:
+			draw4();
+			break;
+			case 5:
+			draw4();
+			draw1();
+			break;
+			case 6:
+			draw4();
+			draw2mid();
+			break;
+		}
+	}
+	function draw1(){
+		var dotx;
+		var doty;
+		ctx.beginPath();
+		dotx = dx+.5*w;//设置这个圆点的中心在骰子面水平方向的中心
+		doty = dy + .5*h//设置这个圆点的中心在骰子面垂直方向的中心
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
+	}
+	function draw2(){
+		var dotx;
+		var doty;
+		ctx.beginPath();
+		dotx = dx+3*radius;
+		doty = dy+3*radius;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		dotx = dx + w -3*radius;
+		doty = dy + h -3*radius;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);//构造第二个圆点
+		ctx.closePath();
+		ctx.fill();
+	}
+	function draw4(){
+		var dotx;
+		var doty;
+		ctx.beginPath();
+		dotx = dx+3*radius;
+		doty = dy+3*radius;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		dotx = dx+w-3*radius;
+		doty = dy+h-3*radius;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
+		ctx.beginPath();
+		dotx = dx+3*radius;
+		doty = dy+h-3*radius;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		dotx = dx+w-3*radius;
+		doty = dy+3*radius;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
+	}
+	function draw2mid(){
+		var dotx;
+		var doty;
+		ctx.beginPath();
+		dotx = dx+3*radius;
+		doty = dy+.5*h;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		dotx = dx+w-3*radius;
+		doty = dy+.5*h;
+		ctx.arc(dotx,doty,radius,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
+	}
+	</script>
+
+
+
+
+</body>
+</html>

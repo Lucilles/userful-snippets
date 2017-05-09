@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#mycanvas{
+		background:url(snow.jpg) center no-repeat;
+	}
+
+
+	</style>
+</head>
+<body>
+	<canvas id="mycanvas" >
+		
+	</canvas>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	var canvas = document.getElementById('mycanvas');
+	canvas.width = width = window.innerWidth;
+	canvas.height = height = window.innerHeight;
+	var ctx = canvas.getContext('2d');
+	var red = Math.floor(Math.random()*256);
+	var green = Math.floor(Math.random()*256);
+	var blue = Math.floor(Math.random()*256);
+	var color = 'rgb('+red+","+green+","+blue+')';
+	var snowsNum = 300;//雪花的数量
+	var snows = [];//放置每一个雪花的位置
+	for(var i = 0;i<snowsNum;i++){
+		snows.push({
+			x:Math.random()*width,
+			y:Math.random()*height,
+			r:Math.random()*3 + 1,
+			//d:Math.random()*snowsNum//雪花的密度
+		})
+	}
+	function draw(){
+		ctx.clearRect(0,0,width,height);
+		ctx.beginPath();
+		for(var i = 0;i<snowsNum;i++){
+			var p = snows[i];
+			//console.log(p);
+			ctx.moveTo(p.x,p.y);
+			ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+		}
+		//ctx.fillStyle=color;
+		ctx.fillStyle="#fff";
+		ctx.fill();
+		update();
+	}
+	//function to move the snows
+	function update(){
+		for(var i = 0;i<snowsNum;i++){
+			var p = snows[i];
+			p.y += 0.5;
+			if(p.y>height){
+				snows[i]={x:Math.random()*width,y:-10,r:p.r}
+			}
+		}
+	setInterval(draw,15);
+	}
+	draw();
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
