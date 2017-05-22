@@ -1,0 +1,235 @@
+body{
+	font-family:Tahoma, Arial, "PingHei", "Helvetica Neue", "Hiragino Sans GB", "Microsoft yahei", SimSum, sans-serif;
+margin: 0;
+}
+a{
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.container{
+	position: relative;
+}
+.clearfix:after{
+content:'';
+display: block;
+clear: both;
+}
+.nav{
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    top: 0;
+}
+.nav .nav_icon{
+	position: absolute;
+	top: 30px;
+	left: 57px;
+	width: 2%;
+	cursor: pointer;
+}
+.nav .top_nav{
+	width: 16%;
+	background: rgba(0,0,0,.6);
+	 z-index: 3;
+	 position: absolute;
+	 padding: 80px 0;
+	font-size: 16px;
+	left: -16%;
+}
+.nav .top_nav img{
+	position: absolute;
+	top: 0%;
+	left: 5%;
+	width: 16%;
+}
+.nav .nav_list{
+	line-height: 56px;
+}
+.nav .nav_list li{
+	text-align: left;
+    margin-left: 30%;
+}
+.nav .nav_list a{
+	color: #fff;
+}
+.nav .nav_list a:hover{
+	color:#c3a171;
+}
+.change_lang{
+position: absolute;
+right: 116px;
+top: 30px;
+font-size: 16px;
+color: #fff;
+}
+.change_lang a{
+	color: #fff;
+	text-decoration: none;
+}
+.content,.container{
+	max-width: 1920px;
+	overflow: hidden;
+}
+.container img{
+	max-width: 100%;
+	display: block;
+}
+.content .kv{
+	position: relative;
+}
+.content .kv .about{
+position: absolute;
+    width: 11.4%;
+    background: #d4af7b;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    left: 44.3%;
+    bottom: 20%;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+.content .kv .about:hover{
+	background:#845e28;
+}
+.content .product .about{
+	left: 81%;
+	bottom: 15%;
+}
+.content .activity .about{
+	left: 81%;
+	bottom: 30%;
+}
+.product_list li{
+	width: 24.99%;
+	float: left;
+}
+.product_list li a{
+	display: block;
+}
+.translate{
+-webkit-perspective:2500;
+-moz-perspective:2500;
+}
+.translate:hover .image {
+-webkit-transform:rotateY(180deg);
+-moz-transform:rotateY(180deg);
+}
+.image {
+width: 100%;
+-webkit-transform-style:preserve-3d;
+-webkit-transition:1.5s;
+-moz-transform-style:preserve-3d;
+-moz-transition:1.5s;
+}
+.display {
+position: absolute;
+display: block;
+-webkit-backface-visibility:hidden;
+-moz-backface-visibility:hidden;
+}
+.back {
+-webkit-transform:rotateY(180deg);
+-moz-transform:rotateY(180deg);
+}
+.title1{
+	text-align: center;
+	color: #6a6a6a;
+	font-size: 42px;
+	font-weight: 400;
+
+}
+.title1 span{
+	color: #080808;
+		font-weight: 500;
+}
+.footer_f{
+	height: 200px;
+	width: 100%;
+	background: #d2d2d2;
+}
+
+/*关于奢斐*/
+.about_list li{
+	position: relative;
+}
+.about_list li .modal{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left: 0;
+background:rgba(0,0,0,.4);
+}
+.about_list li:hover .modal{
+background:transparent;
+}
+.about_list{
+	position: relative;
+}
+.about_list .tit{
+    position: absolute;
+    z-index: 9;
+    top: 42%;
+    left: 28%;
+}
+.join{
+	position: relative;
+}
+.join_list{
+	width: 66%;
+	margin: 0 auto;
+	position: absolute;
+	top:70%;
+	left: 17%;
+}
+.join_list li{
+width: 20%;
+float: left;
+    margin-top: 1px;
+    cursor: pointer;
+}
+.join_list li a{
+	display: block;
+}
+.tab{
+	background: #FFF;
+}
+.tab_content{
+	width: 66%;
+	margin:0 auto 50px;
+
+}
+.tab_content h2{
+    color: #000;
+    font-size: 40px;
+    border-bottom: 1px solid #b1b1b1;
+    font-weight: 300;
+    padding-bottom: 8px;
+}
+.job_detail{
+	margin-top: 30px;
+}
+.job_detail .left{
+	float: left;
+	width: 30%;
+	text-align: left;
+	height: 100%;
+}
+.job_detail .right{
+	width: 70%;
+	float: right;
+	line-height: 30px;
+    margin-top: -4px;
+}
+.job_detail .right p{
+	margin: 0;
+	font-size: 10px;
+}
+.dis_none{
+	display: none;
+}
