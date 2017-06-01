@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Staged progress bar</title>
+        <style type="text/css">
+            *{margin:0;padding:0;}
+            html,body{height:100%;}
+            ul{list-style:none;}
+            .cf:after{content:"";display:block;clear:both;height: 0;}
+            #bar{height:26px;margin:100px 10px;background: #eaddce;width: 740px;}
+            #bar div{float:left;position:relative;}
+            #bar .staged, #bar .progress{border-color:#fff;}
+            #bar .staged{    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-top: -9px;
+    line-height: 40px;
+    font-size: 14px;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    z-index: 4;
+    background: #fb6316;}
+            #bar .staged i{position:relative;overflow:hidden;display:block;width:inherit;height:inherit;border-radius:50%;}
+            #bar .staged i:before{content:"";display:block;width:0;height:inherit;border-radius:50%;}
+            #bar .progress{    width: 200px;
+    height: 8px;
+    margin-left: -3px;
+    z-index: 3;
+    border-style: solid;
+    border-width: 2px 0;
+    margin-top: 8px;}
+            #bar .progress:last-child{border-right-width:2px;border-top-right-radius:10px;border-bottom-right-radius:10px;}
+            #bar .progress i{width:0;height:inherit;display:block;border-radius:0 10px 10px 0;position:relative;font-style:normal;}
+            #bar .progress{background:#f1eae4;}
+            #bar .sp i:before, #bar .progress i{background:#fb6316;}
+            #bar .staged:not(:first-child){margin-left:-4px;}
+            #bar .staged:before{position:absolute;content:attr(data-text);width:inherit;height:inherit;top:90%;left:0;}
+            #bar .staged:after{content:attr(data-value);color:#fff;width:inherit;height:inherit;position:absolute;top:0;left:0;}
+            #bar .sp i:before{width:100%;transition:width 1s;}
+            .msg:before, .msg:after{display:block;position:absolute;border-style:solid;border-color:#ccc;background:#fff;top:30px;}
+            .msg:before{content:attr(data-text);width:200px;height:40px;line-height:40px;font-size:12px;text-align:center;border-radius:4px;border-width:1px;top:-68px;left:calc(100% - 114px);}
+            .msg:after{content:"";width:14px;height:14px;transform:rotate(45deg);border-width:0 1px 1px 0;top:-34px;left:calc(100% - 20px);}
+            .ml_10{
+margin-left:-10px;
+            }
+            .mr_10{
+margin-right:-10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="bar" class="cf" data-value="2000" data-text="还有 [number] 点经验升级">
+            <div class="staged sp ml_10" data-value="0" data-text="v1"><i></i></div>
+            <div class="progress"><i></i></div><em></em>
+            <div class="staged" data-value="200" data-text="v2"><i></i></div>
+            <div class="progress"><i></i></div><em></em>
+            <div class="staged" data-value="1000" data-text="v3"><i></i></div>
+            <div class="progress"><i></i></div><em></em>
+            <div class="staged mr_10" data-value="5000" data-text="v4"><i></i></div>
+        </div>
+        <script type="text/javascript">
+            var progressBar = (function(){
+                var $ = function(sele){
+                    return document.querySelectorAll(sele);
+                }
+                return function(a){
+                    var getValue = function(obj,attr){
+                        return Number(obj.getAttribute(a.value));
+                    }
+                    var box = $(a.box)[0];
+                    var value = getValue(box);
+                    var text = box.getAttribute(a.text);
+                    var staged = $(a.staged);
+                    var progress = $(a.progress);
+                    var i = 0, index = 0, num = 0, numV = 0, n = 1, af_index = 0, timeout = 0, stopAm = null;
+                    var af = function(fn){
+                        if(!requestAnimationFrame || !cancelAnimationFrame){
+                            clearTimeout(af_index);
+                            af_index = setTimeout(fn, 1000/60);
+                        }
+                        else{
+                            cancelAnimationFrame(af_index);
+                            af_index = requestAnimationFrame(fn);
+                        }
+                    }
+                    var setMsg = function(){
+                        var msg = progress[index];
+                        if(a.note){
+                            var arr = text.split(a.note);
+                            text = arr[0] + n + arr[1];
+                        }
+                        msg.setAttribute("data-text", text);
+                        msg.className = a.msg;
+                    }
+                    var animation = function(){
+                        if(i == 0){
+                            if(staged.length == index + 1){
+                                numV = value * 2;
+                            }
+                            else numV = getValue(staged[index + 1]);
+                            if(n == 0) {
+                                progress[index].style.width = "1%";
+                                return
+                            };
+                            if(n < 0 && staged.length > index + 1){
+                                n = numV - value;
+                                if(Number(progress[index].style.width.split("%")[0])<5) progress[index].style.width = "3%";
+                                setMsg();
+                                return;
+                            }
+                        }
+                        num = Math.ceil(++i * numV / 100);
+                        if(num > value){
+                            num = value;
+                            //console.log(num)
+                            n = numV - num;
+                            if(n > 0){
+                                if(staged.length > index + 1) setMsg();
+                                return;
+                            }
+                            
+                        }
+                        if(i == 100){
+                            staged[index + 1].className += " " + a.stagedProgress;
+                        }
+                        if(i > 105){ //105% 宽，自己根据样式调整。
+                            num = numV;
+                            index++;
+                            i = 0;
+                            timeout = setTimeout(function(){
+                                af(animation);
+                                clearTimeout(timeout);
+                            }, a.stagedSleep);
+                            return;
+                        }
+                        progress[index].style.width = i + "%";
+                        af(animation);
+                    }
+                    animation()
+                }
+            })();
+            progressBar({
+                box : "#bar",
+                text :　"data-text", // box 的属性
+                note : "[number]", // box 的属性 （可以省略，计算好直接写入提示语句。）;
+                msg : "msg",
+                staged : ".staged",
+                progress : ".progress i",
+                stagedProgress : "sp",
+                value : "data-value",
+                stagedSleep : "900",
+                sleep : "3000"
+            });
+        </script>
+    </body>
+</html>

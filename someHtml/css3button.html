@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.btn{
+		position: relative;
+		    height: 25px;
+    width: 56px;
+	}
+	.checkbox{
+	-webkit-appearance:none;
+	height: 25px;
+    width: 56px;
+    background: #f234d3;
+    border-radius: 10px;
+    margin: 0;
+    outline: none;
+	}
+.checkbox:checked{
+	background: #f00;
+}
+label{
+	position: absolute;
+	left: -5px;
+	transition:1s linear;
+	width: 25px;
+	height: 25px;
+	border-radius: 100%;
+	background: #f88;
+	top: 0;
+}
+.checkbox:checked+label{
+left: 40px;
+}
+	
+
+
+
+
+
+	</style>
+
+</head>
+<body>
+<div class='btn'>
+	<input type="checkbox" class='checkbox' id='btn'>
+	<label for="btn"></label>
+	</div>
+</body>
+</html>

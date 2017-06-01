@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<!-- 在线客服 -->
+<div class="online_kf">
+    <img src="images/online_kf.png" alt="" />
+    <img src="images/online_kfclose.png" alt="" class='online_close'/>
+</div>
+
+
+
+
+	<script>
+$(function(){
+    //在线客服移动
+    var lgb = $(".online_kf");
+    if(lgb.length>0){
+        lgb = lgb[0];
+        lgb.addEventListener("touchstart",function(e){
+            this.isStart = true;
+            var touch = e.touches[0];
+            this.step = {
+                    x : touch.pageX - $(this).offset().left,
+                    y : touch.pageY - $(this).offset().top
+            }
+            e.preventDefault();
+        });
+        lgb.addEventListener("touchmove",function(e){
+            if(this.isStart){
+                var touch = e.touches[0];
+                var step = this.step;
+                $(this).css({
+                    left:touch.clientX - step.x,
+                    top:touch.clientY + step.y,
+                    right:"inherit",
+                    bottom:"inherit"
+                });
+                if(step.x>=50 && step.y>=50){
+                    this.move = true;
+                }else{
+                    this.move = false;
+                }
+                
+            }
+        });
+        lgb.addEventListener("touchend",function(e){
+            this.isStart = false;
+            this.move = false;
+        });
+    }
+})
+</body>
+</html>

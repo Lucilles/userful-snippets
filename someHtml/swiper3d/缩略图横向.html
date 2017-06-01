@@ -20,13 +20,14 @@ margin: 0 auto;
 }
 .smallImg{
     height: 100%;
-    width: 280px;
+    width:800px;
     border: 1px solid #f0f0f0;
     display: inline-block;
     position: relative;
 }
 .swiper-container3 {
-height: 450px;
+height: 250px;
+width: 700px;
 margin-top: 45px;
 text-align: center;
 }
@@ -39,7 +40,7 @@ text-align: center;
 }
 .bigImg li{
     width: 850px;
-    height: 540px;
+    height: 340px;
     overflow: hidden;
     position: relative;
 }
@@ -58,7 +59,7 @@ text-align: center;
     top: 30px;
 }
 .swiper-slide-active img{
-    border: 3px solid #fad97f;
+    opacity: 1
 }
 .smallimg{
     position: absolute;
@@ -71,11 +72,6 @@ text-align: center;
 .bigImg .active{
     display: block;
  }   
-
- .swiper-wrapper{
-    transform:translate3d(0,0,0)!important;
-    -webkit-transform:translate3d(0,0,0)!important;
- }
     </style>
 </head>
 <body>
@@ -97,9 +93,9 @@ text-align: center;
                     <div class="swiper-slide"><img src="images/list1-3.jpg"/></div>            
             </div>
         </div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+       <!-- Add Arrows -->
+   <!--       <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> -->
     </div>
     </div>
     <!-- Swiper JS -->
@@ -112,13 +108,13 @@ text-align: center;
         var swiper = new Swiper('.swiper-container3', {
             nextButton: '.swiper-button-next',
             prevButton: '.swiper-button-prev',
-            direction: 'vertical',
+            direction: 'horizontal',
             slidesPerView: 3,
             paginationClickable: true,
             spaceBetween: 23,
             mousewheelControl: true,
             loop:true,
-            autoplay:1000,
+            autoplay:5000,
             onSlideChangeEnd:function(swiper){
                 var index=$('.swiper-slide-duplicate-active').data('swiper-slide-index');
                 $('.bigImg li').hide();
@@ -132,11 +128,11 @@ text-align: center;
                 $('.bigImg li').hide();
                 $('.bigImg li').eq(index).fadeIn(1000);
         })
-        $('.scrollImg').hover(function(){
-            swiper.stopAutoplay();
-        },function(){
-            swiper.startAutoplay();
-        })
+        // $('.scrollImg').hover(function(){
+        //     swiper.stopAutoplay();
+        // },function(){
+        //     swiper.startAutoplay();
+        // })
     })
     </script>
 </body>

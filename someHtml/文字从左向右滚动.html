@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+ *{  
+        margin: 0;  
+        padding: 0;  
+    }  
+    .notice_container{  
+    	position: relative;
+    		height: 1.4rem;
+    line-height: 1.4rem;
+        background:  #e0e0e1;
+        overflow: hidden;
+    }  
+.notice{
+    color: #717171;
+position: absolute;
+width: 100%;
+    margin: 0;
+    font-size: 1em;
+    display: block;
+    -webkit-animation:scoll 10s linear 0s infinite; 
+}
+.notice i{
+	display: inline-block;
+    width: .27rem;
+    vertical-align: middle;
+    margin-right: .05rem;
+}
+    @keyframes scoll{  
+        0%{  
+            left:100%;  
+        }  
+        100%{
+        	left:-100%;
+        }
+
+    }   
+</style>
+</head>
+<body>
+<div class="notice_container">
+<p class='notice'>
+    <i></i>已有<span class="blue">300,000+</span>用户在线咨询立邦刷新服务
+</p>
+</div>
+
+
+
+<script>
+
+
+</script>
+
+</body>
+</html>
