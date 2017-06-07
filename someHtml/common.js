@@ -394,7 +394,20 @@ String.prototype.startWith = function(s){
 
 
 
-
+//    增加 减少数量
+    $("span.reduce").on("click", function () {
+        var value = $("#ic-goods-count").val();
+        if(value == 1){
+            return;
+        }
+        var val = --value;
+        $(this).siblings("input").val(val)
+    });
+    $("span.add").on("click", function () {
+        var value = $("#ic-goods-count").val();
+        var val = ++value;
+        $(this).siblings("input").val(val)
+    });
 
 
 
