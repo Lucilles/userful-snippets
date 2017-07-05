@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>drag</title>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <style>
+		/*在线客服*/
+		.online_kf{
+			position: fixed;
+			top: 50%;
+			margin-top: -120px;
+			right: 4%;
+			z-index: 9999;
+		}
+		.online_kf .online_close{
+			width: 30%;
+			position: absolute;
+			top: 33.5%;
+		    right: 3.5%;
+		}
+    </style>
+</head>
+<body>
+<!-- 在线客服 -->
+<div class="online_kf">
+    <img src="online_kf.png" alt="" />
+    <img src="online_kfclose.png" alt="" class='online_close'/>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(function(){
+    //在线客服移动
+    var lgb = $(".online_kf");
+    if(lgb.length>0){
+        lgb = lgb[0];
+        lgb.addEventListener("touchstart",function(e){
+            this.isStart = true;
+            var touch = e.touches[0];
+            this.step = {
+                    x : touch.pageX - $(this).offset().left,
+                    y : touch.pageY - $(this).offset().top
+            }
+            e.preventDefault();
+        });
+        lgb.addEventListener("touchmove",function(e){
+            if(this.isStart){
+                var touch = e.touches[0];
+                var step = this.step;
+                $(this).css({
+                    left:touch.clientX - step.x,
+                    top:touch.clientY + step.y,
+                    right:"inherit",
+                    bottom:"inherit"
+                });
+                if(step.x>=50 && step.y>=50){
+                    this.move = true;
+                }else{
+                    this.move = false;
+                }
+                
+            }
+        });
+        lgb.addEventListener("touchend",function(e){
+            this.isStart = false;
+            this.move = false;
+        });
+    }
+})
+
+
+
+
+
+
+	</script>
+</body>
+</html>
