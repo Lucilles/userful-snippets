@@ -58,7 +58,7 @@ padding:0;
 </style>
 </head>
 <body>
-<div class="container">
+<!-- <div class="container">
 	<ul class="imgs">
 		<li class=""><img src="images/list1-1.jpg" alt=""></li>
 		<li class="two"><img src="images/list1-2.jpg" alt=""></li>
@@ -67,7 +67,7 @@ padding:0;
 		<li class="five"><img src="images/list1-2.jpg" alt=""></li>
 		<li class="six"><img src="images/list1-3.jpg" alt=""></li>
 	</ul>
-</div>
+</div> -->
 <div class="container_left">
 	<ul class="imgs_left">
 		<li class="one"><img src="images/list1-1.jpg" alt=""></li>
@@ -78,6 +78,8 @@ padding:0;
 		<li class="six"><img src="images/list1-3.jpg" alt=""></li>
 	</ul>
 </div>
+<button class="before">前</button>
+<button class='after'>后</button>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script>
 	// 向上移动
@@ -117,10 +119,9 @@ padding:0;
          marginLeft: -width + 'px'
          }, 500, function() {
          $first.css({'margin-left':'0px'}).appendTo($parent);
-     });    
+     });   
 };
 setInterval(function(){doscrollLeft()}, 2000);
-
 
 
 

@@ -25,11 +25,17 @@ ul{
 	visibility: hidden;
 }
 input{
-	outline: 0;
+	outline: none;
 }
 
+.box-sizing{
+	box-sizing:border-box;
+}
 
-
+img{
+    max-width: 100%;
+    display: inline-block;
+}
 
 
 

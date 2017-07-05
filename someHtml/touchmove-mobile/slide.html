@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Staged progress bar</title>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width,user-scalable=no" />
+		<link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+<div class="switch">
+	<div id="slide1" class="tab">
+		<ul>
+			<li class="add">
+				<div class="vfx-image-wrap">
+					<div class="before-image"><img src="images/left1.jpg"></div>
+					<div class="after-image"><img src="images/right1.jpg"></div>
+					<div class="divider-bar"></div>
+					<p class="txt">客厅</p>
+				</div>
+			</li>
+			<li class="add">
+				<div class="vfx-image-wrap">
+					<div class="before-image">
+					<img src="images/left2.jpg" ></div>
+					<div class="after-image"><img src="images/right2.jpg"></div>
+					<div class="divider-bar"></div>
+					<p class="txt">客厅</p>
+				</div>
+			</li>
+			<li class="add">
+				<div class="vfx-image-wrap">
+					<div class="before-image"><img src="images/left1.jpg"></div>
+					<div class="after-image"><img src="images/right1.jpg"></div>
+					<div class="divider-bar"></div>
+					<p class="txt">客厅</p>
+				</div>
+			</li>
+
+		</ul>
+	</div>
+	<ul class="control" id="slide_control1">
+        <li class="cli current"></li>
+        <li class="cli"></li>
+        <li class="cli" style="margin-right:0px;"></li>
+	</ul>
+</div>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="slide.js"></script>
+<script>
+//$(function(){
+		new Slide({
+			target:$('#slide1 li.add'),
+			control:$('#slide_control1 li.cli')
+		});
+
+    	//解决方案拖拽效果
+
+	    var imageWrap = $('.vfx-image-wrap'),
+	        topImage = $(this).find('.before-image'),
+	        divider = $(this).find('.divider-bar'),
+	        stayBounce = $('.toggle-function');
+
+	    imageWrap.on("touchmove", function (e) {
+	        // Gotta localize top image and divider so it only applies to this
+	        var offsets = $(this).offset(),
+	            fullWidth = $(this).width(),
+	            mouseX = e.originalEvent.targetTouches[0].pageX - offsets.left,
+	            topImage = $(this).find('.before-image'),
+	            divider = $(this).find('.divider-bar');
+
+	        if (mouseX < 0) {
+	            mouseX = 0;
+	        } else if (mouseX > fullWidth) {
+	            mouseX = fullWidth
+	        }
+
+	        $(this).addClass('special');
+	        divider.css({ left: mouseX, transition: 'none' });
+	        topImage.css({ width: mouseX, transition: 'none' });
+	    });
+	    stayBounce.click(function(){
+	        $(this).toggleClass('stay');
+	    });
+	    imageWrap.on("touchend", function () {
+	        if (!stayBounce.hasClass('stay')) {
+	            divider.css({  left: '50%', transition: 'all .3s' });
+	            topImage.css({  width: '50%', transition: 'all .3s' });
+	        }
+	    });
+//})
+
+
+</script>
+        
+    </body>
+</html>
