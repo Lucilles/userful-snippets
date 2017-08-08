@@ -9,13 +9,13 @@ $("#more").on("mouseover",function () {
         more.innerHTML += "#more:after{transform:rotateX(0deg);" +
         "-ms-transform:rotateX(0deg); 	/* IE 9 */" +
         "-moz-transform:rotateX(0deg);	/* Firefox */" +
-        "-webkit-transform:rotateX(0deg); /* Safari ºÍ Chrome */" +
+        "-webkit-transform:rotateX(0deg); /* Safari å’Œ Chrome */" +
         "-o-transform:rotateX(0deg)};";
 
         more1.innerHTML += "#more:before{transform:rotateX(90deg);" +
         "-ms-transform:rotateX(90deg); 	/* IE 9 */" +
         "-moz-transform:rotateX(90deg);	/* Firefox */" +
-        "-webkit-transform:rotateX(90deg); /* Safari ºÍ Chrome */" +
+        "-webkit-transform:rotateX(90deg); /* Safari å’Œ Chrome */" +
         "-o-transform:rotateX(90deg)};"
     }else{
         var style1 = document.createElement("style");
@@ -34,13 +34,13 @@ $("#more").on("mouseover",function () {
         moreCss.innerHTML += "#more:before{transform:rotateX(90deg);" +
         "-ms-transform:rotateX(90deg); 	/* IE 9 */" +
         "-moz-transform:rotateX(90deg);	/* Firefox */" +
-        "-webkit-transform:rotateX(90deg); /* Safari ºÍ Chrome */" +
+        "-webkit-transform:rotateX(90deg); /* Safari å’Œ Chrome */" +
         "-o-transform:rotateX(90deg)};";
 
         moreCss1.innerHTML +="#more:after{transform:rotateX(0deg);" +
         "-ms-transform:rotateX(0deg); 	/* IE 9 */" +
         "-moz-transform:rotateX(0deg);	/* Firefox */" +
-        "-webkit-transform:rotateX(0deg); /* Safari ºÍ Chrome */" +
+        "-webkit-transform:rotateX(0deg); /* Safari å’Œ Chrome */" +
         "-o-transform:rotateX(0deg)};";
     }
 }).on("mouseleave", function () {
@@ -50,20 +50,22 @@ $("#more").on("mouseover",function () {
     moreCss1.innerHTML = ""
 })
 
-//$("#picture").on("mouseover", function () {
-//    $(this).find("img").css({
-//        "transform":"scale(1.5)",
-//        "transition":"1s linear"
-//    });
-//    $(this).find("#info").fadeIn("1s")
-//}).on("mouseleave", function () {
-//    $(this).find("img").css({
-//        "transform":"scale(1.0)",
-//        "transition":"1s linear"
-//    });
-//    $(this).find("#info").fadeOut("1s")
-//})
-
+var moves;
+function move(){
+    moves = setInterval(function () {
+    if($("#btn1").hasClass("btn1")){
+        $("#btn1").removeClass("btn1")
+    }else{
+        $("#btn1").addClass("btn1")
+    }
+},1000);
+}
+move();
+$('#btn1').hover(function(){
+        clearInterval(moves);
+},function(){
+  move();
+})
 
 
 
