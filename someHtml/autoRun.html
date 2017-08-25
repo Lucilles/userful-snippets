@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+.tabBox{
+    width: 200px;
+    height: 200px;
+}
+    .tabList li{
+        display: none;
+        width: 200px;
+        height: 140px;
+    }
+    .tabList li.active{
+        display: block;
+    }
+    img{
+        max-width: 100%;
+        display: block;
+    }
+    .bulletList li{
+        width: 10px;
+        height: 10px;
+        background: #fe2;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .bulletList li.active{
+        background: #f00;
+    }
+    ul{
+        padding: 0;
+    }
+	</style>
+</head>
+<body>
+<div class="tabBox">
+    <ul class='tabList'>
+        <li class='active'><img src="last9.jpg" alt=""></li>
+        <li><img src="last6.jpg" alt=""></li>
+        <li><img src="last7.jpg" alt=""></li>
+        <li><img src="last8.jpg" alt=""></li>
+    </ul>
+    <ul class='bulletList'>
+        <li class='active'></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script>
+$(function(){
+    //设置自动轮播的时间
+    timer = setInterval(autoRun,2000);
+    $('.bulletList li').on('click',function(){
+        var index = $(this).index();
+        console.log(index);
+        $(this).addClass('active').siblings().removeClass('active').parent('.bulletList').siblings('.tabList').find('li').eq(index).addClass('active').siblings().removeClass('active');
+    });
+    //设置鼠标移进停止轮播
+    $('.tabBox').on('mouseenter',function(){
+        clearInterval(timer);
+    }).on('mouseleave',function(){
+        timer = setInterval(autoRun,2000)
+    })
+})
+function autoRun(){
+    var index =$('.bulletList li.active').index();
+        index++;
+        if(index > 3){
+            index = 0
+        }
+        console.log(index);
+    $('.bulletList li').eq(index).addClass('active').siblings().removeClass('active').parent('.bulletList').siblings('.tabList').find('li').eq(index).addClass('active').siblings().removeClass('active');
+}
+	
+</script>
+</body>
+</html>
