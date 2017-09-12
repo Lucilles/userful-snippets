@@ -50,22 +50,6 @@ $("#more").on("mouseover",function () {
     moreCss1.innerHTML = ""
 })
 
-var moves;
-function move(){
-    moves = setInterval(function () {
-    if($("#btn1").hasClass("btn1")){
-        $("#btn1").removeClass("btn1")
-    }else{
-        $("#btn1").addClass("btn1")
-    }
-},1000);
-}
-move();
-$('#btn1').hover(function(){
-        clearInterval(moves);
-},function(){
-  move();
-})
 
 
 
