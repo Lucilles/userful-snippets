@@ -32,6 +32,26 @@ window.addEventListener("resize", function () {
 }, false);
 
 
-
+//设置屏幕可滑动与不可滑动
+//开启滑动
+function startMove() {
+    $("body").css({
+        overflowY: "auto"
+    });
+    fixVideo();
+    document.removeEventListener("touchmove", stopDefault, false);
+}
+//禁止滑动
+function stopMove() {
+    $("body").css({
+        overflowY: "hidden"
+    });
+    fixVideo(true);
+    document.addEventListener("touchmove", stopDefault, false);
+}
+//阻止默认事件
+function stopDefault(e) {
+    e.preventDefault();
+}
 
 
