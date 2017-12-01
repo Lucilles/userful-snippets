@@ -332,3 +332,38 @@ function is_weixn(){
     }    
 }  
 
+
+
+//字体大小手机适配   用rem计算
+//为了避免加载前字体很小突然变大的问题，应该先设置body为none，后面等字体调整好载show
+(function () {
+    var PSDWidth = 375, //设计图宽度
+        maxWidth = 768, //最大适配iPad
+        toRem = PSDWidth / 100,
+        fs;
+
+    function HTMLfontSize() {
+        var html = document.documentElement,
+            screenWidth = window.innerWidth,
+            screenHeight = window.innerHeight;
+
+        if (screenWidth <= maxWidth) {
+            fs = screenWidth / toRem;
+        } else {
+            fs = maxWidth / toRem;
+        }
+
+        html.style.fontSize = fs + "px";
+        html.style.height = screenHeight + "px";
+    }
+
+    HTMLfontSize();
+
+    var timer = null;
+    window.addEventListener("resize", function () {
+        clearTimeout(timer);
+        timer = setTimeout(HTMLfontSize, 100);
+    }, false);
+    $('body').show();
+}());
+
