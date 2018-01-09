@@ -1,0 +1,119 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>文字列表无缝向上滚动JavaScript代码</title>
+    <style>
+        *
+        {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+        body
+        {
+            font-size: 12px;
+        }
+        .up{
+            overflow: hidden; 
+            height: 100px;
+        }
+h3#scrollList{
+    border-top: 1px solid #d9d9d9;
+    margin-top: 20px;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #3e3e3e;
+}
+h3#scrollList span{
+color: #69a4d0;
+
+}
+h3#scrollList + .up li{
+  font-size: 14px;
+  text-align: center;
+  color: #7a7a7a;
+  margin-bottom: 8px;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <h3 class="orderedNum" id="scrollList">本月已有<span>1234</span>户业主预约墙面检测</h3>
+    <div  class='up'>
+        <ul class='up-list'>
+            <li><span class="name">1杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">2杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">3杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">4杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">5杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">6杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">7杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">8杨xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">9xx</span><span class="phone">186****6465</span></li>
+            <li><span class="name">10x</span><span class="phone">186****6465</span></li>
+            <li><span class="name">11x</span><span class="phone">186****6465</span></li>
+            <li><span class="name">12x</span><span class="phone">186****6465</span></li>
+        </ul>
+        <ul  class='up2'>
+        </ul>
+    </div>
+    <script language="javascript">
+        // (function($) {
+        //     $.fn.shangxiagun = function(option) {
+        //         var defaultvalue = { speed: 40, mar: null, first: "", second: "" };
+        //         var opts = $.extend(defaultvalue, option || {});
+        //         var h = $(this).height();
+        //         var obj = $(this);
+        //         var demo1 = obj.find("." + opts.first);
+        //         var demo2 = obj.find("." + opts.second);
+        //         demo2.css("min-height", h);
+        //         demo1.css("min-height", h);
+        //         demo2.html(demo1.html());
+        //         var len = demo1.height();
+        //         function quee() {
+        //             if (obj.get(0).scrollTop > len){ 
+        //                 obj.scrollTop(0);
+        //                 console.log('again')
+        //             }
+        //             else {
+        //                 obj.get(0).scrollTop++
+        //             }
+        //         }
+        //         opts.mar = setInterval(quee, opts.speed)
+        //     }
+        // })(jQuery)
+        // $(".up").shangxiagun({ first: "up-list", second: "up2" });
+        function toTop(){
+            var obj = $('.up');
+            var h = obj.height();
+            var demo1 = obj.find('.up-list');
+            var demo2 = obj.find(".up2");
+            demo2.html(demo1.html());
+            var len = demo1.height();
+            function quee() {
+                if (obj.get(0).scrollTop > len){ 
+                    obj.scrollTop(0);
+                }
+                else {
+                    obj.get(0).scrollTop++
+                }
+            }
+            var mar = setInterval(quee, 35);
+        }
+
+        toTop();
+        //点击快速预约开始滚动
+        $(document).on('click','.fixed-sidbar-wrapper .overlay-btn-1',function(){
+            toTop();
+        })
+        $('.up').on('click',function(){
+            toTop();
+        })
+    </script>
+
+</body>
+</html>
