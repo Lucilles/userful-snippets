@@ -87,7 +87,7 @@ h3#scrollList + .up li{
         //     }
         // })(jQuery)
         // $(".up").shangxiagun({ first: "up-list", second: "up2" });
-        function toTop(){
+        function toTop(speed){
             var obj = $('.up');
             var h = obj.height();
             var demo1 = obj.find('.up-list');
@@ -102,16 +102,21 @@ h3#scrollList + .up li{
                     obj.get(0).scrollTop++
                 }
             }
-            var mar = setInterval(quee, 35);
+            var mar = setInterval(quee, speed);
+            console.log(speed);
         }
 
-        toTop();
+        //toTop(35);
         //点击快速预约开始滚动
         $(document).on('click','.fixed-sidbar-wrapper .overlay-btn-1',function(){
             toTop();
         })
+        var scroll = true;
         $('.up').on('click',function(){
-            toTop();
+            if(scroll){
+                toTop(25);
+            }
+            scroll = false;
         })
     </script>
 
